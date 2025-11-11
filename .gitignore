@@ -1,4 +1,4 @@
-out/
-*.pkl
-*.sav
-*.h5
+out/models/
+.ipynb_checkpoints/
+__pycache__/
+*.log
