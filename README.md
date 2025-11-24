@@ -1,66 +1,89 @@
 🧠 Fitness Data – Machine Learning Regression Project
 
-This project explores a synthetic fitness dataset using supervised Machine Learning regression models.
-The goal is to analyze relationships between physiological and lifestyle factors and predict key fitness indicators.
+Fragestellung
 
-🎯 Objectives
+Welche Verfahren des maschinellen Lernens eignen sich am besten zur Vorhersage des Kalorienverbrauchs anhand von Aktivitäts- und Körperdaten?
 
-The project aims to answer the following questions:
+Datensatz
 
-Predict VO2max – a measure of aerobic endurance based on age, sex, weight, training habits, sleep, and other factors.
-→ Useful for evaluating physical fitness without performing an actual test.
+Für dieses Projekt wurde der folgende echte Fitness-Datensatz verwendet:
+🔗 https://www.opendatabay.com/data/ai-ml/79f97d41-7e85-476c-84a1-610283f9de4e
 
-Predict body fat percentage (body_fat_pct) – based on anthropometric and lifestyle data.
-→ Helps to understand which habits most strongly influence body fat levels.
+Der Datensatz enthält verschiedene Aktivitäts- und Körpermetriken wie Schritte, Herzfrequenz, Gewicht, Trainingsdauer und den gemessenen Kalorienverbrauch.
 
-Predict 5 km running time (run_5k_min) – using fitness and training data.
-→ Goal: to build a model that forecasts sports performance.
+Datenvorverarbeitung
 
-⚙️ Models Used
+Die Daten wurden mithilfe eines sklearn-Pipelinesystems vollständig vorverarbeitet:
 
-For each regression task, three different models were trained and compared:
+Behandlung fehlender Werte
 
-Linear Regression – baseline interpretable model.
+Skalierung numerischer Features
 
-Random Forest Regressor – non-linear model that performs well with mixed feature types.
+One-Hot-Encoding kategorialer Variablen
 
-XGBoost Regressor – powerful boosting model often achieving the best overall performance.
+optionale Erzeugung zusätzlicher Polynom-Features
 
-Model performance was evaluated using RMSE and MAE metrics, along with cross-validation for robustness.
+Train-/Test-Split wurde vor dem Modelltraining durchgeführt.
 
-🧩 Workflow
+Verwendete Modelle
 
-Data generation (synthetic dataset).
+Es wurden drei Regressionsmodelle verglichen:
 
-Exploratory data analysis (EDA) and feature understanding.
+Lineare Regression
 
-Preprocessing with pipelines (imputation, scaling, one-hot encoding).
+Polynomiale Regression (mit Features)
 
-Model training and hyperparameter tuning (GridSearchCV / RandomizedSearchCV).
+Random Forest Regression
 
-Evaluation and comparison of results.
+Alle Modelle wurden mithilfe derselben Pipeline trainiert, um eine faire Vergleichbarkeit zu gewährleisten.
 
-Visualization of predictions and feature importance.
+Evaluierungsmethoden
 
-📊 Results
+Jedes Modell wurde anhand mehrerer Metriken bewertet:
 
-Different models performed best for different target variables:
+MAE — Mean Absolute Error
 
-Simpler models (Linear Regression) generalized better in some cases.
+RMSE — Root Mean Squared Error
 
-Tree-based models (Random Forest, XGBoost) achieved lower RMSE but showed signs of overfitting on training data.
+Sowohl:
 
-All models were visualized and compared using saved figures in the /out/ directory.
+auf dem Test-Set, als auch
 
-📁 Project Structure
-├── data/               # Synthetic dataset  
-├── notebooks/          # Main Jupyter notebooks  
-├── out/                # Saved plots and model outputs  
-├── models/             # Trained model files (.pkl)  
-└── README.md
+per Cross-Validation (k=10)
 
-🧠 Notes
+um Stabilität und Generalisierungsfähigkeit zu überprüfen.
 
-The dataset is synthetic, created for educational and demonstration purposes.
+Hyperparameter-Optimierung
 
-No deployment stage is included (optional in assignment).
+Zur Verbesserung der Modellleistung wurde für jedes Modell eine RandomizedSearchCV-Optimierung durchgeführt.
+Danach wurden die Modelle erneut mittels Cross-Validation und auf dem Test-Set bewertet.
+
+Visualisierung
+
+Für alle Modelle wurden erstellt:
+
+Predicted vs. True Plots
+
+Residual Plots (Fehleranalyse)
+
+Vergleichende Grafiken der Modellleistung
+
+Dies erlaubte eine klare Analyse von Overfitting, Unterfitting und systematischen Fehlern.
+
+Ergebnisse
+
+Die Auswertung zeigt deutlich, dass:
+
+⭐ Die Polynomiale Regression (mit erweiterten Features) die beste Performance erzielt hat.
+
+niedrigste MAE- und RMSE-Werte
+
+gleichmäßige Residuenverteilung
+
+robusteste Ergebnisse in der Cross-Validation
+
+Die Lineare Regression zeigte klare Underfitting-Strukturen, während Random Forest gut, aber weniger präzise als das Polynommodell abschnitt.
+
+Fazit
+
+Für diesen Datensatz eignet sich die Polynomiale Regression mit erweiterten Features am besten zur Vorhersage des Kalorienverbrauchs.
